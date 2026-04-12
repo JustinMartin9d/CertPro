@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CertPro — Professional Certification Exams</title>
+<meta name="description" content="Industry-recognized certification exams for PMP, CSM, CISSP, AWS, Security+, Lean Six Sigma and more. Earn verifiable credentials employers trust.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0A1628;--navy2:#112040;--navy3:#1a305e;--gold:#C9952A;--gold2:#E8B94A;--gold3:#F5D080;--cream:#F8F4EC;--cream2:#EDE8DC;--text:#0A1628;--muted:#5a6a8a;--light:#8a9ab8;--white:#ffffff;--border:#D4C9A8;--success:#2d7a4f;--danger:#9b2335}
+body{font-family:'Source Sans 3',sans-serif;background:var(--cream);color:var(--text);min-height:100vh}
+h1,h2,h3{font-family:'Playfair Display',serif}
+nav{background:var(--navy);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--gold)}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-mark{width:32px;height:32px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:var(--navy);font-size:16px;border-radius:4px}
+.logo-text{color:var(--white);font-family:'Playfair Display',serif;font-size:20px;font-weight:600}
+.logo-text span{color:var(--gold2)}
+.nav-links{display:flex;gap:0.25rem;align-items:center;flex-wrap:wrap}
+.nav-btn{background:none;border:none;color:#a0b0cc;font-family:'Source Sans 3',sans-serif;font-size:13px;padding:8px 12px;cursor:pointer;border-radius:4px;transition:all 0.2s}
+.nav-btn:hover,.nav-btn.active{color:var(--white);background:rgba(255,255,255,0.08)}
+.nav-cta{background:var(--gold);color:var(--navy);font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:600;padding:8px 16px;border:none;border-radius:4px;cursor:pointer;transition:all 0.2s}
+.nav-cta:hover{background:var(--gold2)}
+.page{display:none;min-height:calc(100vh - 64px)}
+.page.active{display:block}
+.hero{background:var(--navy);padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 60px,rgba(201,149,42,0.03) 60px,rgba(201,149,42,0.03) 61px)}
+.hero-badge{display:inline-block;background:rgba(201,149,42,0.15);border:1px solid rgba(201,149,42,0.4);color:var(--gold3);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:1.5rem}
+.hero h1{color:var(--white);font-size:clamp(2rem,5vw,3.2rem);font-weight:700;line-height:1.15;margin-bottom:1.25rem;max-width:700px;margin-left:auto;margin-right:auto}
+.hero h1 span{color:var(--gold2)}
+.hero p{color:#8a9ab8;font-size:1.1rem;max-width:540px;margin:0 auto 2.5rem;line-height:1.7}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--gold);color:var(--navy);font-family:'Source Sans 3',sans-serif;font-weight:600;font-size:15px;padding:12px 28px;border:none;border-radius:5px;cursor:pointer;transition:all 0.2s}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:var(--white);font-family:'Source Sans 3',sans-serif;font-weight:500;font-size:15px;padding:12px 28px;border:1.5px solid rgba(255,255,255,0.25);border-radius:5px;cursor:pointer;transition:all 0.2s}
+.btn-secondary:hover{border-color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.05)}
+.cats-bar{background:var(--navy2);border-top:1px solid rgba(201,149,42,0.2);border-bottom:1px solid rgba(201,149,42,0.2);padding:1rem 2rem;display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
+.cat-tag{display:flex;align-items:center;gap:8px;color:#a0b0cc;font-size:13px;cursor:pointer;padding:4px 10px;border-radius:20px;border:1px solid transparent;transition:all 0.2s}
+.cat-tag:hover,.cat-tag.active-cat{color:var(--gold2);border-color:rgba(201,149,42,0.3);background:rgba(201,149,42,0.08)}
+.cat-dot{width:8px;height:8px;border-radius:50%}
+.section{padding:3.5rem 2rem;max-width:1200px;margin:0 auto}
+.section-label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem}
+.section h2{font-size:clamp(1.5rem,3vw,2.1rem);color:var(--navy);margin-bottom:0.5rem}
+.section-sub{color:var(--muted);font-size:1rem;line-height:1.7;max-width:580px;margin-bottom:2rem}
+.filter-bar{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem}
+.filter-btn{background:var(--white);border:1px solid var(--border);color:var(--muted);font-family:'Source Sans 3',sans-serif;font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px;cursor:pointer;transition:all 0.2s}
+.filter-btn:hover{border-color:var(--gold);color:var(--navy)}
+.filter-btn.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.cert-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.25rem}
+.cert-card{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:all 0.25s;cursor:pointer}
+.cert-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(10,22,40,0.1);border-color:var(--gold)}
+.cert-card-header{padding:1.25rem 1.5rem;display:flex;align-items:flex-start;justify-content:space-between}
+.cert-acronym{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700}
+.cert-badge-cat{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:3px}
+.cert-card-body{padding:0 1.5rem 1.5rem}
+.cert-card-body h3{font-size:0.95rem;font-weight:600;color:var(--navy);margin-bottom:0.4rem}
+.cert-card-body p{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:1rem}
+.cert-meta{display:flex;gap:1rem;margin-bottom:1rem}
+.cert-meta-item{font-size:11px;color:var(--muted)}
+.cert-meta-item strong{display:block;color:var(--navy);font-size:13px;font-weight:600}
+.cert-price-row{display:flex;align-items:center;justify-content:space-between;padding-top:0.75rem;border-top:1px solid var(--cream2)}
+.cert-price-amount{font-size:1.2rem;font-weight:700;font-family:'Playfair Display',serif;color:var(--navy)}
+.cert-price-amount span{font-size:11px;font-weight:400;font-family:'Source Sans 3',sans-serif;color:var(--muted)}
+.btn-card{background:var(--navy);color:var(--white);font-family:'Source Sans 3',sans-serif;font-size:12px;font-weight:600;padding:7px 14px;border:none;border-radius:4px;cursor:pointer;transition:all 0.2s}
+.btn-card:hover{background:var(--navy3)}
+.cat-pm .cert-card-header{background:#EAF3DE}
+.cat-pm .cert-acronym{color:#27500A}
+.cat-pm .cert-badge-cat{background:#C0DD97;color:#173404}
+.cat-cyber .cert-card-header{background:#E6F1FB}
+.cat-cyber .cert-acronym{color:#0C447C}
+.cat-cyber .cert-badge-cat{background:#B5D4F4;color:#042C53}
+.cat-cloud .cert-card-header{background:#EEEDFE}
+.cat-cloud .cert-acronym{color:#3C3489}
+.cat-cloud .cert-badge-cat{background:#CECBF6;color:#26215C}
+.cat-process .cert-card-header{background:#FAEEDA}
+.cat-process .cert-acronym{color:#633806}
+.cat-process .cert-badge-cat{background:#FAC775;color:#412402}
+.cat-ai .cert-card-header{background:#FAECE7}
+.cat-ai .cert-acronym{color:#712B13}
+.cat-ai .cert-badge-cat{background:#F5C4B3;color:#4A1B0C}
+.pricing-section{background:var(--navy2);padding:4rem 2rem}
+.pricing-inner{max-width:1100px;margin:0 auto}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin-top:2.5rem}
+.pricing-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:1.75rem}
+.pricing-card.featured{border:2px solid var(--gold);position:relative;background:rgba(201,149,42,0.06)}
+.pricing-featured-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 14px;border-radius:20px;white-space:nowrap}
+.pricing-card h3{font-size:1rem;color:var(--white);margin-bottom:0.4rem}
+.pricing-card p{font-size:12px;color:#8a9ab8;margin-bottom:1.25rem;line-height:1.6}
+.pricing-amount{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--white);margin-bottom:0.2rem}
+.pricing-amount span{font-size:14px;font-weight:400;font-family:'Source Sans 3',sans-serif;color:#8a9ab8}
+.pricing-list{list-style:none;margin:1.25rem 0;display:flex;flex-direction:column;gap:8px}
+.pricing-list li{font-size:12px;color:#a0b0cc;display:flex;align-items:center;gap:8px}
+.pricing-list li::before{content:'✓';color:var(--gold2);font-weight:700;font-size:13px;flex-shrink:0}
+.btn-pricing{width:100%;padding:10px;font-family:'Source Sans 3',sans-serif;font-weight:600;font-size:13px;border-radius:5px;cursor:pointer;border:none;transition:all 0.2s;margin-top:0.5rem}
+.btn-pricing.featured{background:var(--gold);color:var(--navy)}
+.btn-pricing.featured:hover{background:var(--gold2)}
+.btn-pricing.standard{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,0.25)}
+.btn-pricing.standard:hover{background:rgba(255,255,255,0.08)}
+.trust-bar{background:var(--navy);padding:2rem;text-align:center;border-top:1px solid rgba(201,149,42,0.2)}
+.trust-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;margin-top:1rem}
+.trust-stat strong{display:block;color:var(--gold2);font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700}
+.trust-stat span{color:#8a9ab8;font-size:12px}
+.exam-select-wrap{max-width:1000px;margin:0 auto;padding:2rem}
+.exam-select-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+.exam-select-card{background:var(--white);border:1.5px solid var(--border);border-radius:8px;padding:1.25rem;cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;gap:0.6rem}
+.exam-select-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 4px 16px rgba(10,22,40,0.08)}
+.exam-select-card.selected{border-color:var(--gold);background:rgba(201,149,42,0.04)}
+.exam-select-acronym{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--navy)}
+.exam-select-name{font-size:12px;font-weight:600;color:var(--navy)}
+.exam-select-desc{font-size:11px;color:var(--muted);line-height:1.4}
+.exam-select-tags{display:flex;gap:0.4rem;flex-wrap:wrap}
+.exam-select-tag{font-size:10px;color:var(--muted);background:var(--cream);padding:2px 7px;border-radius:3px;border:1px solid var(--border)}
+.exam-select-price{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin-top:auto}
+.payment-wrap{max-width:480px;margin:0 auto;padding:3rem 2rem}
+.payment-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:2rem}
+.payment-header{text-align:center;margin-bottom:1.75rem;padding-bottom:1.25rem;border-bottom:1px solid var(--cream2)}
+.payment-header h2{font-size:1.2rem;color:var(--navy);margin-bottom:0.25rem}
+.payment-header p{font-size:13px;color:var(--muted)}
+.payment-summary{background:var(--cream);border:1px solid var(--border);border-radius:6px;padding:1rem;margin-bottom:1.5rem}
+.payment-summary-row{display:flex;justify-content:space-between;font-size:13px;color:var(--text);padding:3px 0}
+.payment-summary-row.total{font-weight:600;border-top:1px solid var(--border);padding-top:8px;margin-top:4px;font-size:14px}
+.form-group{margin-bottom:1.1rem}
+.form-label{display:block;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--navy);margin-bottom:5px}
+.form-input{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:5px;font-family:'Source Sans 3',sans-serif;font-size:14px;color:var(--text);background:var(--white);transition:border-color 0.2s}
+.form-input:focus{outline:none;border-color:var(--gold)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.card-icons{display:flex;gap:5px;margin-bottom:6px}
+.card-icon{width:34px;height:20px;background:var(--cream2);border:1px solid var(--border);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:var(--muted)}
+.btn-pay{width:100%;padding:13px;background:var(--gold);color:var(--navy);font-family:'Source Sans 3',sans-serif;font-size:15px;font-weight:700;border:none;border-radius:5px;cursor:pointer;margin-top:0.5rem;transition:all 0.2s}
+.btn-pay:hover{background:var(--gold2)}
+.payment-secure{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:0.75rem;font-size:11px;color:var(--light)}
+.stripe-badge{font-size:10px;background:var(--cream2);border:1px solid var(--border);padding:2px 7px;border-radius:3px;color:var(--muted)}
+.exam-header{background:var(--navy);padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem}
+.exam-title{color:var(--white);font-family:'Playfair Display',serif;font-size:1.1rem}
+.exam-meta-bar{display:flex;align-items:center;gap:1.5rem}
+.exam-timer{color:var(--gold2);font-size:1rem;font-weight:600;background:rgba(201,149,42,0.15);padding:5px 12px;border-radius:4px;border:1px solid rgba(201,149,42,0.3)}
+.exam-progress-wrap{min-width:160px}
+.exam-progress-label{color:#8a9ab8;font-size:11px;margin-bottom:4px}
+.exam-progress-bar{height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden}
+.exam-progress-fill{height:100%;background:var(--gold);border-radius:2px;transition:width 0.4s}
+.exam-body{max-width:780px;margin:0 auto;padding:2rem}
+.exam-question-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:2rem;margin-bottom:1.5rem}
+.question-number{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem}
+.question-text{font-size:1.05rem;color:var(--navy);line-height:1.7;font-weight:500;margin-bottom:1.75rem}
+.options-list{display:flex;flex-direction:column;gap:10px}
+.option-btn{background:var(--cream);border:1.5px solid var(--border);border-radius:6px;padding:11px 15px;text-align:left;font-family:'Source Sans 3',sans-serif;font-size:14px;color:var(--text);cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:12px;width:100%}
+.option-btn:hover{border-color:var(--gold);background:rgba(201,149,42,0.05)}
+.option-btn.selected{border-color:var(--gold);background:rgba(201,149,42,0.1)}
+.option-btn.correct{border-color:var(--success);background:rgba(45,122,79,0.08);color:var(--success)}
+.option-btn.wrong{border-color:var(--danger);background:rgba(155,35,53,0.08);color:var(--danger)}
+.option-letter{width:24px;height:24px;border-radius:50%;background:var(--white);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.option-btn.selected .option-letter{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.option-btn.correct .option-letter{background:var(--success);border-color:var(--success);color:var(--white)}
+.option-btn.wrong .option-letter{background:var(--danger);border-color:var(--danger);color:var(--white)}
+.explanation-box{background:rgba(10,22,40,0.04);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:1rem 1.25rem;margin-top:1rem;display:none}
+.explanation-box.visible{display:block}
+.explanation-box p{font-size:13px;color:var(--muted);line-height:1.7}
+.exam-nav{display:flex;justify-content:space-between;align-items:center}
+.btn-exam{font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:600;padding:9px 22px;border-radius:5px;cursor:pointer;border:none;transition:all 0.2s}
+.btn-next{background:var(--navy);color:var(--white)}
+.btn-next:hover{background:var(--navy3)}
+.btn-finish{background:var(--gold);color:var(--navy)}
+.btn-finish:hover{background:var(--gold2)}
+.btn-skip{background:transparent;color:var(--muted);border:1.5px solid var(--border);cursor:pointer}
+.btn-skip:hover{border-color:var(--navy);color:var(--navy)}
+.ai-loading{text-align:center;padding:3rem}
+.ai-spinner{width:38px;height:38px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 1rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ai-loading p{color:var(--muted);font-size:14px}
+.results-hero{background:var(--navy);text-align:center;padding:3rem 2rem}
+.results-score-ring{width:110px;height:110px;margin:0 auto 1.5rem;position:relative}
+.results-score-ring svg{width:100%;height:100%}
+.score-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.score-pct{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;color:var(--white)}
+.score-lbl{font-size:10px;color:#8a9ab8;letter-spacing:1px}
+.results-verdict{color:var(--gold2);font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:0.5rem}
+.results-sub{color:#8a9ab8;font-size:14px}
+.results-body{max-width:680px;margin:0 auto;padding:2.5rem 2rem}
+.results-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.result-stat{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:1.25rem;text-align:center}
+.result-stat strong{display:block;font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--navy)}
+.result-stat span{font-size:12px;color:var(--muted)}
+.results-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+.review-section h3{font-size:1rem;color:var(--navy);margin-bottom:1rem;font-weight:600}
+.review-item{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:0.9rem;margin-bottom:0.6rem;border-left:3px solid var(--border)}
+.review-item.correct{border-left-color:var(--success)}
+.review-item.wrong{border-left-color:var(--danger)}
+.review-item-q{font-size:13px;color:var(--navy);font-weight:500;margin-bottom:0.4rem}
+.review-item-a{font-size:12px;color:var(--muted)}
+.cert-container{max-width:840px;margin:0 auto;padding:2rem}
+.cert-actions-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
+.cert-actions-bar h2{font-size:1.1rem;color:var(--navy)}
+.cert-actions{display:flex;gap:0.75rem}
+.btn-cert-action{font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:600;padding:8px 16px;border-radius:4px;cursor:pointer;transition:all 0.2s}
+.btn-download{background:var(--navy);color:var(--white);border:none}
+.btn-download:hover{background:var(--navy3)}
+.btn-host{background:var(--gold);color:var(--navy);border:none}
+.btn-host:hover{background:var(--gold2)}
+.certificate{background:var(--white);border:1px solid var(--border);border-radius:4px;aspect-ratio:1.414;position:relative;overflow:hidden;width:100%}
+.cert-outer-border{position:absolute;inset:12px;border:2px solid var(--gold);border-radius:2px;pointer-events:none}
+.cert-inner-border{position:absolute;inset:18px;border:0.5px solid rgba(201,149,42,0.35);border-radius:1px;pointer-events:none}
+.cert-corner{position:absolute;width:28px;height:28px}
+.cert-corner svg{width:100%;height:100%}
+.cert-corner.tl{top:8px;left:8px}
+.cert-corner.tr{top:8px;right:8px;transform:scaleX(-1)}
+.cert-corner.bl{bottom:8px;left:8px;transform:scaleY(-1)}
+.cert-corner.br{bottom:8px;right:8px;transform:scale(-1,-1)}
+.cert-content{position:absolute;inset:32px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;padding:1rem}
+.cert-logo-area{display:flex;flex-direction:column;align-items:center;gap:5px}
+.cert-logo-mark{width:38px;height:38px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:var(--gold);font-size:16px;border-radius:4px}
+.cert-org{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.cert-main{display:flex;flex-direction:column;align-items:center;gap:5px}
+.cert-presents{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted)}
+.cert-title{font-family:'Playfair Display',serif;font-size:clamp(1rem,2.2vw,1.6rem);font-weight:700;color:var(--navy);line-height:1.2}
+.cert-recipient-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.cert-recipient{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;color:var(--gold);line-height:1.1;border-bottom:1px solid var(--gold);padding-bottom:5px}
+.cert-desc{font-size:9px;color:var(--muted);max-width:72%;line-height:1.5;margin-top:2px}
+.cert-footer{display:flex;justify-content:space-between;align-items:flex-end;width:100%}
+.cert-sig{text-align:center}
+.cert-sig-line{width:100px;height:1px;background:var(--navy);margin:0 auto 4px}
+.cert-sig-name{font-size:9px;font-weight:600;color:var(--navy);letter-spacing:1px}
+.cert-sig-title{font-size:8px;color:var(--muted)}
+.cert-seal{width:52px;height:52px}
+.cert-seal svg{width:100%;height:100%}
+.host-modal-wrap{display:none;min-height:300px;background:rgba(10,22,40,0.6);align-items:center;justify-content:center;padding:2rem}
+.host-modal-wrap.open{display:flex}
+.host-modal-box{background:var(--white);border-radius:8px;padding:2rem;max-width:400px;width:100%;border:1px solid var(--border)}
+.host-modal-box h3{font-size:1.1rem;color:var(--navy);margin-bottom:0.5rem}
+.host-modal-box p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:1.25rem}
+.host-modal-price{background:var(--cream);border:1px solid var(--border);border-radius:6px;padding:0.9rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between}
+.host-modal-price strong{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--navy)}
+.host-modal-price span{font-size:12px;color:var(--muted)}
+.host-modal-actions{display:flex;gap:0.75rem}
+.btn-modal{flex:1;padding:10px;font-family:'Source Sans 3',sans-serif;font-size:14px;font-weight:600;border-radius:4px;cursor:pointer;border:none;transition:all 0.2s}
+.btn-modal-confirm{background:var(--gold);color:var(--navy)}
+.btn-modal-confirm:hover{background:var(--gold2)}
+.btn-modal-cancel{background:transparent;color:var(--muted);border:1.5px solid var(--border)}
+.lookup-wrap{max-width:680px;margin:0 auto;padding:3rem 2rem}
+.lookup-hero{text-align:center;margin-bottom:2.5rem}
+.lookup-hero h2{font-size:1.8rem;color:var(--navy);margin-bottom:0.5rem}
+.lookup-hero p{font-size:14px;color:var(--muted);line-height:1.6}
+.lookup-form{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.75rem;margin-bottom:1.5rem}
+.lookup-input-wrap{display:flex;gap:0.75rem}
+.lookup-input{flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:5px;font-family:'Source Sans 3',sans-serif;font-size:15px;color:var(--text)}
+.lookup-input:focus{outline:none;border-color:var(--gold)}
+.btn-lookup{background:var(--navy);color:var(--white);font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:600;padding:10px 22px;border:none;border-radius:5px;cursor:pointer;white-space:nowrap}
+.btn-lookup:hover{background:var(--navy3)}
+.lookup-result{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:none}
+.lookup-result.visible{display:block}
+.lookup-result-header{background:var(--navy);padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.lookup-result-header h3{color:var(--white);font-size:0.95rem}
+.lookup-status{background:rgba(45,122,79,0.2);border:1px solid rgba(45,122,79,0.4);color:#5acc8a;font-size:11px;font-weight:700;letter-spacing:1px;padding:3px 10px;border-radius:20px}
+.lookup-result-body{padding:1.5rem}
+.lookup-fields{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.lookup-field label{font-size:10px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--muted);margin-bottom:2px;display:block}
+.lookup-field p{font-size:13px;color:var(--navy);font-weight:500}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo" onclick="showPage('home')">
+    <div class="logo-mark">C</div>
+    <div class="logo-text">Cert<span>Pro</span></div>
+  </div>
+  <div class="nav-links">
+    <button class="nav-btn active" id="nav-home" onclick="showPage('home');setActive('nav-home')">Home</button>
+    <button class="nav-btn" id="nav-exams" onclick="showPage('exam-select');setActive('nav-exams')">Certification Exams</button>
+    <button class="nav-btn" id="nav-lookup" onclick="showPage('lookup');setActive('nav-lookup')">Verify Certificate</button>
+    <button class="nav-cta" onclick="showPage('exam-select');setActive('nav-exams')">Get Certified — $25</button>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-badge">9 Professional Certifications Available</div>
+    <h1>Your Professional <span>Certification</span> Destination</h1>
+    <p>Rigorous certification exams across project management, cybersecurity, cloud, process management, and AI. Earn verifiable credentials that employers trust.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="showPage('exam-select');setActive('nav-exams')">Browse Certification Exams</button>
+      <button class="btn-secondary" onclick="showPage('lookup');setActive('nav-lookup')">Verify a Certificate</button>
+    </div>
+  </div>
+  <div class="cats-bar">
+    <div class="cat-tag active-cat" onclick="filterCards('all',this)"><div class="cat-dot" style="background:#C9952A"></div>All Certifications</div>
+    <div class="cat-tag" onclick="filterCards('pm',this)"><div class="cat-dot" style="background:#639922"></div>Project Management</div>
+    <div class="cat-tag" onclick="filterCards('cyber',this)"><div class="cat-dot" style="background:#378ADD"></div>Cybersecurity</div>
+    <div class="cat-tag" onclick="filterCards('cloud',this)"><div class="cat-dot" style="background:#7F77DD"></div>Cloud Computing</div>
+    <div class="cat-tag" onclick="filterCards('process',this)"><div class="cat-dot" style="background:#BA7517"></div>Process Management</div>
+    <div class="cat-tag" onclick="filterCards('ai',this)"><div class="cat-dot" style="background:#D85A30"></div>AI &amp; Emerging Tech</div>
+  </div>
+  <div class="section">
+    <div class="section-label">Certification Catalog</div>
+    <h2>Choose Your Certification Path</h2>
+    <p class="section-sub">Industry-recognized certification exams with AI-generated questions, instant results, and professionally issued certificates upon passing.</p>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterCards('all',null,this)">All (9)</button>
+      <button class="filter-btn" onclick="filterCards('pm',null,this)">Project Management (3)</button>
+      <button class="filter-btn" onclick="filterCards('cyber',null,this)">Cybersecurity (2)</button>
+      <button class="filter-btn" onclick="filterCards('cloud',null,this)">Cloud (1)</button>
+      <button class="filter-btn" onclick="filterCards('process',null,this)">Process (2)</button>
+      <button class="filter-btn" onclick="filterCards('ai',null,this)">AI &amp; Tech (1)</button>
+    </div>
+    <div class="cert-cards" id="cert-card-grid">
+      <div class="cert-card cat-pm" data-cat="pm" onclick="startExam('PMP')"><div class="cert-card-header"><div class="cert-acronym">PMP</div><div class="cert-badge-cat">Project Mgmt</div></div><div class="cert-card-body"><h3>Project Management Professional</h3><p>PMI's flagship certification covering predictive, agile, and hybrid project delivery methodologies.</p><div class="cert-meta"><div class="cert-meta-item"><strong>15</strong>Questions</div><div class="cert-meta-item"><strong>45 min</strong>Duration</div><div class="cert-meta-item"><strong>70%</strong>Pass Mark</div></div><div class="cert-price-row"><div class="cert-price-amount">$25 <span>per exam</span></div><button class="btn-card">Begin Exam</button></div></div></div>
+      <div class="cert-card cat-pm" data-cat="pm" onclick="startExam('CSM')"><div class="cert-card-header"><div class="cert-acronym">CSM</div><div class="cert-badge-cat">Project Mgmt</div></div><div class="cert-card-body"><h3>Certified Scrum Master</h3><p>Validates expertise in Scrum framework, agile principles, and servant leadership for cross-functional teams.</p><div class="cert-meta"><div class="cert-meta-item"><strong>15</strong>Questions</div><div class="cert-meta-item"><strong>35 min</strong>Duration</div><div class="cert-meta-item"><strong>74%</strong>Pass Mark</div></div><div class="cert-price-row"><div class="cert-price-amount">$25 <span>per exam</span></div><button class="btn-card">Begin Exam</button></div></div></div>
+      <div class="cert-card cat-pm" data-cat="pm" onclick="startExam('PRINCE2')"><div class="cert-card-header"><div class="cert-acronym">P2</div><div class="cert-badge-cat">Project Mgmt</div></div><div class="cert-card-body"><h3>PRINCE2 Foundation</h3><p>The UK's leading project management certification, globally recognized across Europe and beyond.</p><div class="cert-meta"><div class="cert-meta-item"><strong>15</strong>Questions</div><div class="cert-meta-item"><strong>40 min</strong>Duration</div><div class="cert-meta-item"><strong>55%</strong>Pass Mark</div></div><div class="cert-price-row"><div class="cert-price-amount">$25 <span>per exam</span></div><button class="btn-card">Begin Exam</button></div></div></div>
+      <div class="cert-card cat-cyber" data-cat="cyber" onclick="startExam('SecurityPlus')"><div class="cert-card-header"><div class="cert-acronym">S+</div><div class="cert-badge-cat">Cybersecurity</div></div><div class="cert-card-body"><h3>CompTIA Security+</h3><p>The baseline cybersecurity certification covering risk management, threats, vulnerabilities, and defensive techniques.</p><div class="cert-meta"><div class="cert-meta-item"><strong>15</strong>Questions</div><div class="cert-meta-item"><strong>40 min</strong>Duration</div><div class="cert-meta-item"><strong>75%</strong>Pass Mark</div></div><div class="cert-price-row"><div class="cert-price-amount">$25 <span>per exam</span></div><button class="btn-card">Begin Exam</button></div></div></div>
+      <div class="cert-card cat-cyber" data-cat="cyber" onclick="startExam('CISSP')"><div class="cert-card-header"><div class="cert-acronym">CISSP</div><div class="cert-badge-cat">Cybersecurity</div></div><div class="cert-card-body"><h3>Certified Information Systems Security Professional</h3><p>Elite security leadership certification covering all eight CISSP domains. The gold standard for security architects.</p><div class="cert-meta"><div class="cert-meta-item"><strong>15</strong>Questions</div><div class="cert-meta-item"><strong>45 min</strong>Duration</div><div class="cert-meta-item"><strong>70%</strong>Pass Mark</div></div><div class="cert-price-row"><div class="cert-price-amount">$35 <span>per exam</span></div><button class="btn-card">Begin Exam</button></div></div></div>
+      <div class="cert-card cat-cloud" data-cat="cloud" onclick="startExam('AWS')"><div class="cert-card-header"><div class="cert-acronym">AWS</div><div class="cert-badge-cat">Cloud</div></div><div class="cert-card-body"><h3>AWS Solutions Architect — Associate</h3><p>Design and deploy scalable, highly available systems on AWS. One of the highest-ROI certifications in tech.</p><div class="cert-meta"><div class="cert-meta-item"><strong>15</strong>Questions</div><div class="cert-meta-item"><strong>45 min</strong>Duration</div><div class="cert-meta-item"><strong>72%</strong>Pass Mark</div></div><div class="cert-price-row"><div class="cert-price-amount">$25 <span>per exam</span></div><button class="btn-card">Begin Exam</button></div></div></div>
+      <div class="cert-card cat-process" data-cat="process" onclick="startExam('LSS')"><div class="cert-card-header"><div class="cert-acronym">LSS</div><div class="cert-badge-cat">Process Mgmt</div></div><div class="cert-card-body"><h3>Lean Six Sigma Green Belt</h3><p>Validates expertise in process improvement, defect reduction, and data-driven operational efficiency.</p><div class="cert-meta"><div class="cert-meta-item"><strong>15</strong>Questions</div><div class="cert-meta-item"><strong>40 min</strong>Duration</div><div class="cert-meta-item"><strong>70%</strong>Pass Mark</div></div><div class="cert-price-row"><div class="cert-price-amount">$25 <span>per exam</span></div><button class="btn-card">Begin Exam</button></div></div></div>
+      <div class="cert-card cat-process" data-cat="process" onclick="startExam('CBPP')"><div class="cert-card-header"><div class="cert-acronym">CBPP</div><div class="cert-badge-cat">Process Mgmt</div></div><div class="cert-card-body"><h3>Certified Business Process Professional</h3><p>APQC's certification validating business process analysis, design, and continuous improvement expertise.</p><div class="cert-meta"><div class="cert-meta-item"><strong>15</strong>Questions</div><div class="cert-meta-item"><strong>40 min</strong>Duration</div><div class="cert-meta-item"><strong>70%</strong>Pass Mark</div></div><div class="cert-price-row"><div class="cert-price-amount">$25 <span>per exam</span></div><button class="btn-card">Begin Exam</button></div></div></div>
+      <div class="cert-card cat-ai" data-cat="ai" onclick="startExam('CPMAI')"><div class="cert-card-header"><div class="cert-acronym">CPMAI</div><div class="cert-badge-cat">AI &amp; Tech</div></div><div class="cert-card-body"><h3>Certified Project Manager — AI</h3><p>The premier certification for project managers leading AI and machine learning initiatives and governance.</p><div class="cert-meta"><div class="cert-meta-item"><strong>15</strong>Questions</div><div class="cert-meta-item"><strong>40 min</strong>Duration</div><div class="cert-meta-item"><strong>70%</strong>Pass Mark</div></div><div class="cert-price-row"><div class="cert-price-amount">$25 <span>per exam</span></div><button class="btn-card">Begin Exam</button></div></div></div>
+    </div>
+  </div>
+  <div class="pricing-section">
+    <div class="pricing-inner">
+      <div class="section-label" style="text-align:center;color:var(--gold)">Pricing</div>
+      <h2 style="text-align:center;color:var(--white);font-size:1.8rem;margin-bottom:0.25rem">Simple, Transparent Pricing</h2>
+      <p style="text-align:center;color:#8a9ab8;font-size:13px">No subscriptions. No hidden fees. Pay for what you need.</p>
+      <div class="pricing-grid">
+        <div class="pricing-card"><h3>Single Certification Exam</h3><p>One AI-powered certification exam with instant scoring, detailed explanations, and a certificate upon passing.</p><div class="pricing-amount">$25 <span>per exam</span></div><ul class="pricing-list"><li>15 AI-generated exam questions</li><li>Instant feedback &amp; explanations</li><li>Downloadable PDF certificate</li><li>Score report included</li></ul><button class="btn-pricing standard" onclick="showPage('exam-select');setActive('nav-exams')">Browse Exams</button></div>
+        <div class="pricing-card featured"><div class="pricing-featured-badge">Most Popular</div><h3>Certificate Hosting</h3><p>Host your certificate on our verified public registry so employers can instantly verify your credentials.</p><div class="pricing-amount">$5 <span>/ year</span></div><ul class="pricing-list"><li>Permanent public registry listing</li><li>Unique verifiable certificate ID</li><li>Employer lookup portal access</li><li>Auto-renewal reminders</li></ul><button class="btn-pricing featured" onclick="showPage('exam-select');setActive('nav-exams')">Get Certified First</button></div>
+        <div class="pricing-card"><h3>CISSP Premium Exam</h3><p>Our most advanced certification exam with premium-difficulty questions reflecting the CISSP's elite standard.</p><div class="pricing-amount">$35 <span>per exam</span></div><ul class="pricing-list"><li>Advanced difficulty questions</li><li>All 8 CISSP domain coverage</li><li>Premium certificate design</li><li>Hosting add-on available</li></ul><button class="btn-pricing standard" onclick="startExam('CISSP')">Start CISSP Exam</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="trust-bar">
+    <p style="color:#8a9ab8;font-size:13px">Trusted by professionals across 40+ countries</p>
+    <div class="trust-stats">
+      <div class="trust-stat"><strong>12,400+</strong><span>Exams Taken</span></div>
+      <div class="trust-stat"><strong>8,900+</strong><span>Certificates Issued</span></div>
+      <div class="trust-stat"><strong>9</strong><span>Certifications</span></div>
+      <div class="trust-stat"><strong>94%</strong><span>Would Recommend</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- EXAM SELECT -->
+<div id="page-exam-select" class="page">
+  <div style="background:var(--navy);padding:2.5rem 2rem;text-align:center">
+    <div class="section-label" style="color:var(--gold)">Step 1 of 2</div>
+    <h2 style="color:var(--white);font-size:1.5rem">Select Your Certification Exam</h2>
+    <p style="color:#8a9ab8;font-size:13px;margin-top:0.5rem">All exams are $25 &middot; CISSP is $35 &middot; Certificate issued upon passing</p>
+  </div>
+  <div class="exam-select-wrap">
+    <div class="exam-select-grid">
+      <div class="exam-select-card" id="sel-PMP" onclick="selectExam('PMP')"><div class="exam-select-acronym">PMP</div><div class="exam-select-name">Project Management Professional</div><div class="exam-select-desc">PMI's flagship certification across predictive, agile, and hybrid PM.</div><div class="exam-select-tags"><div class="exam-select-tag">15 Questions</div><div class="exam-select-tag">45 min</div><div class="exam-select-tag">70% pass</div></div><div class="exam-select-price">$25</div></div>
+      <div class="exam-select-card" id="sel-CSM" onclick="selectExam('CSM')"><div class="exam-select-acronym">CSM</div><div class="exam-select-name">Certified Scrum Master</div><div class="exam-select-desc">Scrum framework, agile principles, and servant leadership.</div><div class="exam-select-tags"><div class="exam-select-tag">15 Questions</div><div class="exam-select-tag">35 min</div><div class="exam-select-tag">74% pass</div></div><div class="exam-select-price">$25</div></div>
+      <div class="exam-select-card" id="sel-PRINCE2" onclick="selectExam('PRINCE2')"><div class="exam-select-acronym">P2</div><div class="exam-select-name">PRINCE2 Foundation</div><div class="exam-select-desc">Globally recognized structured project management framework.</div><div class="exam-select-tags"><div class="exam-select-tag">15 Questions</div><div class="exam-select-tag">40 min</div><div class="exam-select-tag">55% pass</div></div><div class="exam-select-price">$25</div></div>
+      <div class="exam-select-card" id="sel-SecurityPlus" onclick="selectExam('SecurityPlus')"><div class="exam-select-acronym">S+</div><div class="exam-select-name">CompTIA Security+</div><div class="exam-select-desc">Baseline cybersecurity covering threats, risk, and defense.</div><div class="exam-select-tags"><div class="exam-select-tag">15 Questions</div><div class="exam-select-tag">40 min</div><div class="exam-select-tag">75% pass</div></div><div class="exam-select-price">$25</div></div>
+      <div class="exam-select-card" id="sel-CISSP" onclick="selectExam('CISSP')"><div class="exam-select-acronym">CISSP</div><div class="exam-select-name">CISSP</div><div class="exam-select-desc">Elite security architecture across all 8 ISC2 domains.</div><div class="exam-select-tags"><div class="exam-select-tag">15 Questions</div><div class="exam-select-tag">45 min</div><div class="exam-select-tag">70% pass</div></div><div class="exam-select-price" style="color:var(--gold)">$35 — Premium</div></div>
+      <div class="exam-select-card" id="sel-AWS" onclick="selectExam('AWS')"><div class="exam-select-acronym">AWS</div><div class="exam-select-name">AWS Solutions Architect</div><div class="exam-select-desc">Design and deploy scalable, highly available AWS systems.</div><div class="exam-select-tags"><div class="exam-select-tag">15 Questions</div><div class="exam-select-tag">45 min</div><div class="exam-select-tag">72% pass</div></div><div class="exam-select-price">$25</div></div>
+      <div class="exam-select-card" id="sel-LSS" onclick="selectExam('LSS')"><div class="exam-select-acronym">LSS</div><div class="exam-select-name">Lean Six Sigma Green Belt</div><div class="exam-select-desc">Process improvement, defect reduction, and DMAIC methodology.</div><div class="exam-select-tags"><div class="exam-select-tag">15 Questions</div><div class="exam-select-tag">40 min</div><div class="exam-select-tag">70% pass</div></div><div class="exam-select-price">$25</div></div>
+      <div class="exam-select-card" id="sel-CBPP" onclick="selectExam('CBPP')"><div class="exam-select-acronym">CBPP</div><div class="exam-select-name">Certified Business Process Professional</div><div class="exam-select-desc">Business process analysis, design, and optimization.</div><div class="exam-select-tags"><div class="exam-select-tag">15 Questions</div><div class="exam-select-tag">40 min</div><div class="exam-select-tag">70% pass</div></div><div class="exam-select-price">$25</div></div>
+      <div class="exam-select-card" id="sel-CPMAI" onclick="selectExam('CPMAI')"><div class="exam-select-acronym">CPMAI</div><div class="exam-select-name">Certified Project Manager — AI</div><div class="exam-select-desc">Managing AI and machine learning projects and governance.</div><div class="exam-select-tags"><div class="exam-select-tag">15 Questions</div><div class="exam-select-tag">40 min</div><div class="exam-select-tag">70% pass</div></div><div class="exam-select-price">$25</div></div>
+    </div>
+    <div style="text-align:center;margin-top:2rem">
+      <button class="btn-primary" id="proceed-exam-btn" onclick="proceedToPayment()" style="opacity:0.4;pointer-events:none">Continue to Payment &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAYMENT -->
+<div id="page-payment" class="page">
+  <div class="payment-wrap">
+    <div style="margin-bottom:1.25rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:13px" onclick="showPage('exam-select');setActive('nav-exams')">&larr; Back to exam selection</div>
+    <div class="payment-card">
+      <div class="payment-header"><h2>Complete Your Purchase</h2><p>Secure checkout — powered by Stripe</p></div>
+      <div class="payment-summary" id="payment-summary"></div>
+      <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" id="pay-name" placeholder="Jane Smith"></div>
+      <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" id="pay-email" placeholder="jane@company.com"></div>
+      <div class="form-group"><label class="form-label">Card Number</label><div class="card-icons"><div class="card-icon">VISA</div><div class="card-icon">MC</div><div class="card-icon">AMEX</div></div><input type="text" class="form-input" placeholder="1234 5678 9012 3456"></div>
+      <div class="form-row"><div class="form-group"><label class="form-label">Expiry</label><input type="text" class="form-input" placeholder="MM / YY"></div><div class="form-group"><label class="form-label">CVC</label><input type="text" class="form-input" placeholder="123"></div></div>
+      <button class="btn-pay" onclick="processPayment()">Pay <span id="btn-pay-amount">$25.00</span> &mdash; Start Exam</button>
+      <div class="payment-secure"><span>&#128274; 256-bit SSL</span><div class="stripe-badge">Powered by Stripe</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- EXAM -->
+<div id="page-exam" class="page">
+  <div class="exam-header">
+    <div class="exam-title" id="exam-title">Certification Exam</div>
+    <div class="exam-meta-bar">
+      <div class="exam-progress-wrap"><div class="exam-progress-label" id="exam-progress-label">Question 1 of 15</div><div class="exam-progress-bar"><div class="exam-progress-fill" id="exam-progress-fill" style="width:6.6%"></div></div></div>
+      <div class="exam-timer" id="exam-timer">45:00</div>
+    </div>
+  </div>
+  <div class="exam-body">
+    <div class="ai-loading" id="ai-loading"><div class="ai-spinner"></div><p>Generating your certification exam questions with AI...</p></div>
+    <div id="question-display" style="display:none">
+      <div class="exam-question-card">
+        <div class="question-number" id="q-number">Question 1 of 15</div>
+        <div class="question-text" id="q-text"></div>
+        <div class="options-list" id="q-options"></div>
+        <div class="explanation-box" id="q-explanation"><p id="q-explanation-text"></p></div>
+      </div>
+      <div class="exam-nav">
+        <button class="btn-exam btn-skip" id="btn-skip" onclick="skipQuestion()">Skip Question</button>
+        <div style="display:flex;gap:0.75rem">
+          <button class="btn-exam btn-next" id="btn-next" onclick="nextQuestion()" style="display:none">Next Question</button>
+          <button class="btn-exam btn-finish" id="btn-finish" onclick="finishExam()" style="display:none">Submit Exam</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="page-results" class="page">
+  <div class="results-hero">
+    <div class="results-score-ring"><svg viewBox="0 0 110 110" style="transform:rotate(-90deg)"><circle cx="55" cy="55" r="48" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="7"/><circle cx="55" cy="55" r="48" fill="none" stroke="#C9952A" stroke-width="7" stroke-linecap="round" id="score-ring" stroke-dasharray="0 301"/></svg><div class="score-text"><div class="score-pct" id="result-pct">0%</div><div class="score-lbl">SCORE</div></div></div>
+    <div class="results-verdict" id="results-verdict"></div>
+    <div class="results-sub" id="results-sub"></div>
+  </div>
+  <div class="results-body">
+    <div class="results-stats"><div class="result-stat"><strong id="r-correct">0</strong><span>Correct</span></div><div class="result-stat"><strong id="r-wrong">0</strong><span>Incorrect</span></div><div class="result-stat"><strong id="r-skipped">0</strong><span>Skipped</span></div></div>
+    <div class="results-actions">
+      <button class="btn-primary" id="view-cert-btn" onclick="generateCertificate()" style="display:none">View My Certificate</button>
+      <button style="background:var(--navy);color:var(--white);font-family:'Source Sans 3',sans-serif;font-weight:600;font-size:14px;padding:12px 24px;border:none;border-radius:5px;cursor:pointer" onclick="showPage('exam-select');setActive('nav-exams')">Take Another Exam</button>
+    </div>
+    <div class="review-section"><h3>Question Review</h3><div id="review-list"></div></div>
+  </div>
+</div>
+
+<!-- CERTIFICATE -->
+<div id="page-cert" class="page">
+  <div class="cert-container">
+    <div class="cert-actions-bar"><h2>Your Certificate</h2><div class="cert-actions"><button class="btn-cert-action btn-download" onclick="alert('In production: downloads a high-resolution PDF certificate.')">Download PDF</button><button class="btn-cert-action btn-host" onclick="showHostModal()">Host Certificate — $5/yr</button></div></div>
+    <div class="certificate">
+      <div class="cert-outer-border"></div><div class="cert-inner-border"></div>
+      <div class="cert-corner tl"><svg viewBox="0 0 28 28"><path d="M2 26 L2 2 L26 2" fill="none" stroke="#C9952A" stroke-width="1.5"/><circle cx="2" cy="2" r="3" fill="#C9952A"/></svg></div>
+      <div class="cert-corner tr"><svg viewBox="0 0 28 28"><path d="M2 26 L2 2 L26 2" fill="none" stroke="#C9952A" stroke-width="1.5"/><circle cx="2" cy="2" r="3" fill="#C9952A"/></svg></div>
+      <div class="cert-corner bl"><svg viewBox="0 0 28 28"><path d="M2 26 L2 2 L26 2" fill="none" stroke="#C9952A" stroke-width="1.5"/><circle cx="2" cy="2" r="3" fill="#C9952A"/></svg></div>
+      <div class="cert-corner br"><svg viewBox="0 0 28 28"><path d="M2 26 L2 2 L26 2" fill="none" stroke="#C9952A" stroke-width="1.5"/><circle cx="2" cy="2" r="3" fill="#C9952A"/></svg></div>
+      <div class="cert-content">
+        <div class="cert-logo-area"><div class="cert-logo-mark">C</div><div style="font-family:'Playfair Display',serif;font-size:clamp(0.8rem,1.8vw,1.1rem);font-weight:700;color:var(--navy)">CertPro</div><div class="cert-org">Professional Certification Authority</div></div>
+        <div class="cert-main"><div class="cert-presents">This certifies that</div><div class="cert-recipient" id="cert-recipient">Jane Smith</div><div class="cert-recipient-label">Has successfully passed the</div><div class="cert-title" id="cert-cert-title">Certification Exam</div><div class="cert-desc" id="cert-desc">Demonstrating the knowledge and competencies required for professional certification.</div></div>
+        <div class="cert-footer">
+          <div class="cert-sig"><div class="cert-sig-line"></div><div class="cert-sig-name">Dr. Elaine Whitmore</div><div class="cert-sig-title">Certification Director</div></div>
+          <div class="cert-seal"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="none" stroke="#C9952A" stroke-width="1.5"/><circle cx="26" cy="26" r="20" fill="none" stroke="#C9952A" stroke-width="0.5"/><text x="26" y="22" text-anchor="middle" font-family="Playfair Display,serif" font-size="7" font-weight="700" fill="#0A1628">CERT</text><text x="26" y="30" text-anchor="middle" font-family="Playfair Display,serif" font-size="6" fill="#C9952A">PRO</text><text x="26" y="37" text-anchor="middle" font-family="Source Sans 3,sans-serif" font-size="4" fill="#5a6a8a">VERIFIED</text></svg></div>
+          <div class="cert-sig"><div class="cert-sig-line"></div><div class="cert-sig-name" id="cert-date-display">April 2026</div><div class="cert-sig-title">Date Issued</div><div style="font-size:8px;color:var(--muted);margin-top:2px" id="cert-id-display">ID: CPM-000000</div></div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:1rem">Certificate ID: <strong id="cert-id-text">CPM-000000</strong> &mdash; Host it for $5/year so employers can verify instantly.</p>
+  </div>
+  <div class="host-modal-wrap" id="host-modal">
+    <div class="host-modal-box"><h3>Host Your Certificate</h3><p>Make your certificate publicly verifiable on the CertPro registry. Employers can look up your certificate ID at any time to confirm authenticity and current status.</p><div class="host-modal-price"><strong>$5.00</strong><span>per year &middot; cancel anytime</span></div><div class="host-modal-actions"><button class="btn-modal btn-modal-cancel" onclick="hideHostModal()">Cancel</button><button class="btn-modal btn-modal-confirm" onclick="confirmHosting()">Pay $5 &amp; Publish Now</button></div></div>
+  </div>
+</div>
+
+<!-- LOOKUP -->
+<div id="page-lookup" class="page">
+  <div class="lookup-wrap">
+    <div class="lookup-hero">
+      <div class="section-label" style="color:var(--gold)">Employer Verification</div>
+      <h2>Verify a Certificate</h2>
+      <p>Enter a CertPro certificate ID to instantly verify the authenticity and status of any professional certification issued through our platform.</p>
+    </div>
+    <div class="lookup-form">
+      <div style="margin-bottom:0.75rem;font-size:13px;color:var(--muted)">Enter Certificate ID (e.g. CPM-483921)</div>
+      <div class="lookup-input-wrap"><input class="lookup-input" id="lookup-input" type="text" placeholder="XXX-XXXXXX" onkeydown="if(event.key==='Enter')lookupCert()"><button class="btn-lookup" onclick="lookupCert()">Verify</button></div>
+    </div>
+    <div class="lookup-result" id="lookup-result">
+      <div class="lookup-result-header"><h3>Certificate Record Found</h3><div class="lookup-status">ACTIVE &amp; VERIFIED</div></div>
+      <div class="lookup-result-body"><div class="lookup-fields"><div class="lookup-field"><label>Certificate Holder</label><p id="lr-name">—</p></div><div class="lookup-field"><label>Certification</label><p id="lr-cert">—</p></div><div class="lookup-field"><label>Certificate ID</label><p id="lr-id">—</p></div><div class="lookup-field"><label>Issue Date</label><p id="lr-date">—</p></div><div class="lookup-field"><label>Score Achieved</label><p id="lr-score">—</p></div><div class="lookup-field"><label>Hosting Expires</label><p id="lr-expiry">—</p></div></div></div>
+    </div>
+    <div style="margin-top:1.5rem;background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.25rem">
+      <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem">Demo certificate IDs</div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+        <button onclick="document.getElementById('lookup-input').value='CPM-483921';lookupCert()" style="font-size:12px;padding:4px 10px;background:var(--cream);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-family:'Source Sans 3',sans-serif">CPM-483921 (PMP)</button>
+        <button onclick="document.getElementById('lookup-input').value='CSM-271045';lookupCert()" style="font-size:12px;padding:4px 10px;background:var(--cream);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-family:'Source Sans 3',sans-serif">CSM-271045 (CSM)</button>
+        <button onclick="document.getElementById('lookup-input').value='SEC-839204';lookupCert()" style="font-size:12px;padding:4px 10px;background:var(--cream);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-family:'Source Sans 3',sans-serif">SEC-839204 (Security+)</button>
+        <button onclick="document.getElementById('lookup-input').value='AWS-102938';lookupCert()" style="font-size:12px;padding:4px 10px;background:var(--cream);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-family:'Source Sans 3',sans-serif">AWS-102938 (AWS)</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const certData={PMP:{name:'Project Management Professional',full:'Project Management Professional (PMP)',price:25,time:2700,prefix:'CPM',pass:70},CSM:{name:'Certified Scrum Master',full:'Certified Scrum Master (CSM)',price:25,time:2100,prefix:'CSM',pass:74},PRINCE2:{name:'PRINCE2 Foundation',full:'PRINCE2 Foundation',price:25,time:2400,prefix:'P2F',pass:55},SecurityPlus:{name:'CompTIA Security+',full:'CompTIA Security+ (SY0-701)',price:25,time:2400,prefix:'SEC',pass:75},CISSP:{name:'CISSP',full:'Certified Information Systems Security Professional (CISSP)',price:35,time:2700,prefix:'CIS',pass:70},AWS:{name:'AWS Solutions Architect',full:'AWS Certified Solutions Architect — Associate',price:25,time:2700,prefix:'AWS',pass:72},LSS:{name:'Lean Six Sigma Green Belt',full:'Lean Six Sigma Green Belt (LSSGB)',price:25,time:2400,prefix:'LSS',pass:70},CBPP:{name:'Certified Business Process Professional',full:'Certified Business Process Professional (CBPP)',price:25,time:2400,prefix:'CCB',pass:70},CPMAI:{name:'Certified Project Manager — AI',full:'Certified Project Manager — AI (CPMAI)',price:25,time:2400,prefix:'CAI',pass:70}};
+const demoRecords={'CPM-483921':{name:'Marcus J. Reynolds',cert:'Project Management Professional (PMP)',date:'January 15, 2026',score:'87%',expiry:'January 15, 2027'},'CSM-271045':{name:'Priya Anand',cert:'Certified Scrum Master (CSM)',date:'February 3, 2026',score:'89%',expiry:'February 3, 2027'},'SEC-839204':{name:'Thomas K. Winters',cert:'CompTIA Security+ (SY0-701)',date:'March 22, 2026',score:'91%',expiry:'March 22, 2027'},'AWS-102938':{name:'Sandra O. Chambers',cert:'AWS Certified Solutions Architect — Associate',date:'March 30, 2026',score:'84%',expiry:'March 30, 2027'}};
+let currentCert='PMP',selectedExam=null,currentQ=0,questions=[],answers=[],timerInterval=null,timeLeft=2700,userName='Professional',certID='';
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');window.scrollTo(0,0);}
+function setActive(id){document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));if(id&&document.getElementById(id))document.getElementById(id).classList.add('active');}
+function filterCards(cat,catEl,filterEl){if(catEl){document.querySelectorAll('.cat-tag').forEach(t=>t.classList.remove('active-cat'));catEl.classList.add('active-cat');}if(filterEl){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));filterEl.classList.add('active');}document.querySelectorAll('.cert-card').forEach(c=>{c.style.display=(cat==='all'||c.dataset.cat===cat)?'block':'none';});}
+function selectExam(cert){document.querySelectorAll('.exam-select-card').forEach(c=>c.classList.remove('selected'));const el=document.getElementById('sel-'+cert);if(el)el.classList.add('selected');selectedExam=cert;const btn=document.getElementById('proceed-exam-btn');btn.style.opacity='1';btn.style.pointerEvents='auto';}
+function proceedToPayment(){if(!selectedExam)return;currentCert=selectedExam;updatePaymentSummary();showPage('payment');}
+function startExam(cert){currentCert=cert;selectedExam=cert;updatePaymentSummary();showPage('payment');}
+function updatePaymentSummary(){const d=certData[currentCert];const price=d?d.price:25;const name=d?d.full:'Certification Exam';document.getElementById('payment-summary').innerHTML=`<div class="payment-summary-row"><span>${name}</span><span>$${price}.00</span></div><div class="payment-summary-row total"><span>Total</span><span>$${price}.00</span></div>`;document.getElementById('btn-pay-amount').textContent='$'+price+'.00';}
+function processPayment(){const name=document.getElementById('pay-name').value.trim();const email=document.getElementById('pay-email').value.trim();if(!name){alert('Please enter your name.');return;}if(!email){alert('Please enter your email.');return;}userName=name;startExamSession();}
+function startExamSession(){showPage('exam');const d=certData[currentCert];document.getElementById('exam-title').textContent=(d?d.full:'Certification Exam')+' — Certification Exam';timeLeft=d?d.time:2400;updateTimer();clearInterval(timerInterval);timerInterval=setInterval(()=>{timeLeft--;updateTimer();if(timeLeft<=0){clearInterval(timerInterval);finishExam();}},1000);currentQ=0;questions=[];answers=[];loadQuestion();}
+function updateTimer(){const m=Math.floor(timeLeft/60).toString().padStart(2,'0');const s=(timeLeft%60).toString().padStart(2,'0');document.getElementById('exam-timer').textContent=m+':'+s;}
+async function loadQuestion(){document.getElementById('ai-loading').style.display='block';document.getElementById('question-display').style.display='none';document.getElementById('btn-next').style.display='none';document.getElementById('btn-finish').style.display='none';document.getElementById('btn-skip').style.display='inline-block';document.getElementById('q-explanation').classList.remove('visible');const n=currentQ+1;document.getElementById('exam-progress-label').textContent=`Question ${n} of 15`;document.getElementById('exam-progress-fill').style.width=((n/15)*100).toFixed(1)+'%';document.getElementById('q-number').textContent=`Question ${n} of 15`;if(questions[currentQ]){renderQuestion(questions[currentQ]);return;}const d=certData[currentCert];const certFull=d?d.full:currentCert;const prompt=`Generate a single challenging multiple-choice question for the ${certFull} certification exam. This is question ${n} of 15. Make it realistic, professional, and exam-accurate.\n\nRespond ONLY with valid JSON (no markdown, no extra text):\n{"question":"<question text>","options":["A. <text>","B. <text>","C. <text>","D. <text>"],"correct":0,"explanation":"<2-3 sentence explanation>"}\n\nThe "correct" field is the 0-based index. Vary the correct answer position.`;
+try{const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:600,messages:[{role:"user",content:prompt}]})});const data=await r.json();const raw=data.content.map(i=>i.text||'').join('').trim().replace(/```json|```/g,'').trim();const q=JSON.parse(raw);questions[currentQ]=q;renderQuestion(q);}catch(e){const fb=getFallback(currentCert,n);questions[currentQ]=fb;renderQuestion(fb);}}
+function renderQuestion(q){document.getElementById('ai-loading').style.display='none';document.getElementById('question-display').style.display='block';document.getElementById('q-text').textContent=q.question;document.getElementById('q-explanation-text').textContent=q.explanation;const opts=document.getElementById('q-options');opts.innerHTML='';['A','B','C','D'].forEach((ltr,i)=>{const btn=document.createElement('button');btn.className='option-btn';btn.innerHTML=`<div class="option-letter">${ltr}</div><span>${q.options[i].replace(/^[A-D]\.\s*/,'')}</span>`;btn.onclick=()=>selectAnswer(i,q.correct);opts.appendChild(btn);});if(answers[currentQ]!==undefined){const sel=answers[currentQ];const btns=opts.querySelectorAll('.option-btn');btns[sel].classList.add(sel===q.correct?'correct':'wrong');btns[q.correct].classList.add('correct');document.getElementById('q-explanation').classList.add('visible');document.getElementById('btn-skip').style.display='none';if(currentQ<14)document.getElementById('btn-next').style.display='inline-block';else document.getElementById('btn-finish').style.display='inline-block';}}
+function selectAnswer(idx,correct){if(answers[currentQ]!==undefined)return;answers[currentQ]=idx;const btns=document.querySelectorAll('.option-btn');btns[idx].classList.add(idx===correct?'correct':'wrong');if(idx!==correct)btns[correct].classList.add('correct');document.getElementById('q-explanation').classList.add('visible');document.getElementById('btn-skip').style.display='none';if(currentQ<14)document.getElementById('btn-next').style.display='inline-block';else document.getElementById('btn-finish').style.display='inline-block';}
+function nextQuestion(){currentQ++;loadQuestion();}
+function skipQuestion(){if(answers[currentQ]===undefined)answers[currentQ]=-1;nextQuestion();}
+function finishExam(){clearInterval(timerInterval);let correct=0,wrong=0,skipped=0;const reviewed=[];for(let i=0;i<15;i++){const a=answers[i],q=questions[i];if(a===undefined||a===-1){skipped++;reviewed.push({q:q?q.question:'(not reached)',status:'skipped'});}else if(q&&a===q.correct){correct++;reviewed.push({q:q.question,status:'correct'});}else{wrong++;reviewed.push({q:q?q.question:'(loading failed)',status:'wrong'});}}const pct=Math.round((correct/15)*100);const d=certData[currentCert];const passmark=d?d.pass:70;const passed=pct>=passmark;showPage('results');document.getElementById('r-correct').textContent=correct;document.getElementById('r-wrong').textContent=wrong;document.getElementById('r-skipped').textContent=skipped;document.getElementById('result-pct').textContent=pct+'%';document.getElementById('results-verdict').textContent=passed?'Congratulations — You Passed!':'Not Yet Passing — Keep Studying';document.getElementById('results-sub').textContent=passed?`You scored ${pct}% on the ${d?d.name:currentCert} certification exam. Your certificate is ready to download.`:`You scored ${pct}%. A score of ${passmark}% or higher is required. Review the questions below and try again.`;const circ=2*Math.PI*48;const fill=(pct/100)*circ;document.getElementById('score-ring').setAttribute('stroke-dasharray',fill+' '+(circ-fill));document.getElementById('score-ring').setAttribute('stroke',passed?'#C9952A':'#9b2335');document.getElementById('view-cert-btn').style.display=passed?'inline-block':'none';const list=document.getElementById('review-list');list.innerHTML='';reviewed.forEach((r,i)=>{if(!r.q)return;const div=document.createElement('div');div.className='review-item '+(r.status==='correct'?'correct':r.status==='wrong'?'wrong':'');div.innerHTML=`<div class="review-item-q">Q${i+1}: ${r.q.substring(0,120)}${r.q.length>120?'…':''}</div><div class="review-item-a"><span>${r.status==='correct'?'Correct':r.status==='wrong'?'Incorrect':'Skipped'}</span></div>`;list.appendChild(div);});}
+function generateCertificate(){const d=certData[currentCert];certID=(d?d.prefix:'CRT')+'-'+Math.floor(100000+Math.random()*900000);document.getElementById('cert-recipient').textContent=userName||'Professional';document.getElementById('cert-cert-title').textContent=d?d.full:currentCert;document.getElementById('cert-desc').textContent='Having successfully passed the certification examination and demonstrated the required knowledge and professional competencies.';const now=new Date();document.getElementById('cert-date-display').textContent=now.toLocaleString('default',{month:'long'})+' '+now.getFullYear();document.getElementById('cert-id-display').textContent='ID: '+certID;document.getElementById('cert-id-text').textContent=certID;showPage('cert');}
+function showHostModal(){document.getElementById('host-modal').classList.add('open');}
+function hideHostModal(){document.getElementById('host-modal').classList.remove('open');}
+function confirmHosting(){hideHostModal();alert('In production: charges $5 via Stripe and publishes certificate '+certID+' to the public registry.');}
+function lookupCert(){const val=document.getElementById('lookup-input').value.trim().toUpperCase();const rec=demoRecords[val];const res=document.getElementById('lookup-result');if(rec){document.getElementById('lr-name').textContent=rec.name;document.getElementById('lr-cert').textContent=rec.cert;document.getElementById('lr-id').textContent=val;document.getElementById('lr-date').textContent=rec.date;document.getElementById('lr-score').textContent=rec.score;document.getElementById('lr-expiry').textContent=rec.expiry;res.classList.add('visible');}else{res.classList.remove('visible');alert('No certificate found for ID "'+val+'". In production, this searches your live database.');}}
+function getFallback(cert,n){const banks={CSM:[{question:"A Scrum Master notices the Development Team consistently fails to complete all Sprint Backlog items. What should the Scrum Master do?",options:["A. Extend the Sprint duration","B. Facilitate a retrospective to improve forecasting","C. Remove items to make it easier","D. Assign tasks to specific team members"],correct:1,explanation:"The Scrum Master should facilitate improvement through the retrospective, not dictate solutions. The team should inspect their forecasting process. Extending Sprints or assigning tasks violates Scrum principles."}],SecurityPlus:[{question:"Which attack involves intercepting communications between two parties without either party knowing?",options:["A. Phishing","B. Man-in-the-middle","C. SQL injection","D. Denial of service"],correct:1,explanation:"A man-in-the-middle attack occurs when an attacker secretly intercepts and potentially alters communications between two parties who believe they are communicating directly. This differs from phishing, SQL injection, or DoS attacks."}],CISSP:[{question:"Which BEST describes the principle of least privilege?",options:["A. Maximum permissions for any possible task","B. Only the minimum access rights necessary to perform job functions","C. Equal access to all systems","D. Privileges based on seniority"],correct:1,explanation:"Least privilege means users and systems have only the minimum access strictly necessary. This minimizes the attack surface and limits damage from accidents or breaches."}],AWS:[{question:"A company needs a globally distributed static website with high availability. Which combination is MOST appropriate?",options:["A. EC2 instances in multiple regions with Route 53","B. S3 static website hosting with CloudFront","C. Elastic Beanstalk with auto-scaling","D. Lambda behind an Application Load Balancer"],correct:1,explanation:"S3 with CloudFront is the standard solution for globally distributed static websites. S3 provides durable storage while CloudFront edge locations deliver content with low latency worldwide at low cost."}],LSS:[{question:"In DMAIC, during which phase does a team validate the implemented solution achieved the desired improvement?",options:["A. Define","B. Measure","C. Analyze","D. Control"],correct:3,explanation:"The Control phase validates that the solution is working and implements control plans to sustain improvements. It follows the Improve phase and ensures gains are maintained long-term."}],PRINCE2:[{question:"In PRINCE2, who is ultimately accountable for project success and represents business interests?",options:["A. Project Manager","B. Senior User","C. Executive","D. Project Assurance"],correct:2,explanation:"The Executive is the single individual ultimately accountable for the project. They chair the Project Board and are responsible for ensuring value for money. The Project Manager handles day-to-day management."}],PMP:[{question:"A project manager notices a key stakeholder is not attending status meetings. What should the project manager do FIRST?",options:["A. Escalate to the sponsor","B. Investigate the reason for absence","C. Continue without the stakeholder","D. Remove from the communication plan"],correct:1,explanation:"The project manager should first investigate why the stakeholder is absent before acting. Understanding root cause allows for an appropriate response. Escalating or removing would be premature."}],CBPP:[{question:"Which BEST describes an 'as-is' process map?",options:["A. The future desired state","B. The current state as it actually operates","C. A theoretical optimal flow","D. A high-level strategic overview"],correct:1,explanation:"An 'as-is' process map documents the current state of a process as it actually operates today, including all steps, handoffs, and pain points. This contrasts with a 'to-be' map showing the future desired state."}],CPMAI:[{question:"What does CRISP-DM stand for in AI project management?",options:["A. Critical Risk Intelligence for Strategic Project Data Management","B. Cross-Industry Standard Process for Data Mining","C. Certified Resource Integration System for Project Data Models","D. Continuous Research Integration for Strategic Project Delivery"],correct:1,explanation:"CRISP-DM stands for Cross-Industry Standard Process for Data Mining. It is a widely used methodology in data science and AI projects providing a structured approach from business understanding through deployment."}]};const arr=banks[cert]||banks['PMP'];return arr[n%arr.length];}
+</script>
+</body>
+</html>
